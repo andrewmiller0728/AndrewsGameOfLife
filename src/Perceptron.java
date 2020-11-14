@@ -11,9 +11,9 @@ public class Perceptron {
         this.weights = new double[inputCount];
         for (int i = 0; i < inputCount; i++) {
             Random r = new Random();
-            weights[i] = r.nextDouble() * 2 - 1;
+            weights[i] = r.nextDouble();
         }
-        this.bias = 1;
+        this.bias = 0;
     }
 
     public double getOutput(double input) {

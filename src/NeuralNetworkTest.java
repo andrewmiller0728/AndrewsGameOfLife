@@ -8,7 +8,7 @@ public class NeuralNetworkTest {
                                              6,
                                              3,
                                              5);
-        double[] inputs = {50, 15, 1, 1};
+        double[] inputs = {5, 15, 1, 1};
         double[] outputs = nn.getOutputs(inputs);
         for (int i = 0; i < outputs.length; i++) {
             System.out.printf("%s(%d) = %.3f\n", nn.getID(), i, outputs[i]);
