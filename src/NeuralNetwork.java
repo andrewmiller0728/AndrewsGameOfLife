@@ -47,19 +47,22 @@ public class NeuralNetwork {
             layerOutputs = new double[currLayer.size()];
             for (int j = 0; j < currLayer.size(); j++) {
                 if (prevLayerOutputs == null) {
-                    double currOutput = currLayer.get(j).getOutput(inputs[j]);
-                    layerOutputs[j] = currOutput;
-                } else {
-                    layerOutputs[j] = currLayer.get(j).getOutput(prevLayerOutputs[j]);
+                    layerOutputs[j] = currLayer.get(j).getOutput(inputs[j]);
                 }
-                prevLayerOutputs = Arrays.copyOf(layerOutputs, layerOutputs.length);
-                System.out.printf("Layer Outputs = %s\n", Arrays.toString(layerOutputs));
+                else {
+                    layerOutputs[j] = currLayer.get(j).getOutput(prevLayerOutputs);
+                }
             }
+            prevLayerOutputs = Arrays.copyOf(layerOutputs, layerOutputs.length);
         }
         return Arrays.copyOf(layerOutputs, layerOutputs.length);
     }
 
     public String getID() {
         return ID;
+    }
+
+    public ArrayList<ArrayList<Perceptron>> getLayers() {
+        return layers;
     }
 }
