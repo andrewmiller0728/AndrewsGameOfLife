@@ -38,15 +38,17 @@ public class NeuralNetwork {
     }
 
     public double[] getOutputs(double[] inputs) {
+        System.out.println("Getting output from neural network...");
         double[] layerOutputs = null;
         double[] prevLayerOutputs = null;
         for (ArrayList<Perceptron> currLayer : layers) {
+            System.out.printf("Working on layer %d, size = %d\n", layers.indexOf(currLayer), currLayer.size());
             layerOutputs = new double[currLayer.size()];
             for (int j = 0; j < currLayer.size(); j++) {
                 if (prevLayerOutputs == null) {
-                    layerOutputs[j] = currLayer.get(j).getOutput(inputs);
+                    layerOutputs[j] = currLayer.get(j).getOutput(inputs[j]);
                 } else {
-                    layerOutputs[j] = currLayer.get(j).getOutput(prevLayerOutputs);
+                    layerOutputs[j] = currLayer.get(j).getOutput(prevLayerOutputs[j]);
                 }
                 prevLayerOutputs = Arrays.copyOf(layerOutputs, layerOutputs.length);
             }
