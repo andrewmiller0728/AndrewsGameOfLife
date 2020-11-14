@@ -7,9 +7,12 @@ public class NeuralNetwork {
     private ArrayList<Perceptron> inputNodes, outputNodes;
     private ArrayList<ArrayList<Perceptron>> layers;
 
-    public NeuralNetwork(String id, int inputCount, int outputCount,
-                         int hiddenLayerCount, int hiddenLayerSize) {
-        this.ID = id;
+    public NeuralNetwork(String id,
+                         int inputCount,
+                         int outputCount,
+                         int hiddenLayerCount,
+                         int hiddenLayerSize) {
+        ID = id;
 
         layers = new ArrayList<>();
 
@@ -38,21 +41,25 @@ public class NeuralNetwork {
     }
 
     public double[] getOutputs(double[] inputs) {
-        System.out.println("Getting output from neural network...");
         double[] layerOutputs = null;
         double[] prevLayerOutputs = null;
         for (ArrayList<Perceptron> currLayer : layers) {
-            System.out.printf("Working on layer %d, size = %d\n", layers.indexOf(currLayer), currLayer.size());
             layerOutputs = new double[currLayer.size()];
             for (int j = 0; j < currLayer.size(); j++) {
                 if (prevLayerOutputs == null) {
-                    layerOutputs[j] = currLayer.get(j).getOutput(inputs[j]);
+                    double currOutput = currLayer.get(j).getOutput(inputs[j]);
+                    layerOutputs[j] = currOutput;
                 } else {
                     layerOutputs[j] = currLayer.get(j).getOutput(prevLayerOutputs[j]);
                 }
                 prevLayerOutputs = Arrays.copyOf(layerOutputs, layerOutputs.length);
+                System.out.printf("Layer Outputs = %s\n", Arrays.toString(layerOutputs));
             }
         }
         return Arrays.copyOf(layerOutputs, layerOutputs.length);
+    }
+
+    public String getID() {
+        return ID;
     }
 }
