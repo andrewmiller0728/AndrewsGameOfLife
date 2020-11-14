@@ -16,6 +16,10 @@ public class Perceptron {
         this.bias = 0;
     }
 
+    public double getOutput(double input) {
+        return ReLU((input * weights[0]) + bias);
+    }
+
     public double getOutput(double[] inputs) {
         double output = 0;
         for (int i = 0; i < inputs.length; i++) {

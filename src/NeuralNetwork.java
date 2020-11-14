@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class NeuralNetwork {
 
@@ -37,7 +38,19 @@ public class NeuralNetwork {
     }
 
     public double[] getOutputs(double[] inputs) {
-        return null; //TODO: Implement getOutputs()
-        double[] outputs = new double[outputNodes.size()];
+        double[] layerOutputs = null;
+        double[] prevLayerOutputs = null;
+        for (ArrayList<Perceptron> currLayer : layers) {
+            layerOutputs = new double[currLayer.size()];
+            for (int j = 0; j < currLayer.size(); j++) {
+                if (prevLayerOutputs == null) {
+                    layerOutputs[j] = currLayer.get(j).getOutput(inputs);
+                } else {
+                    layerOutputs[j] = currLayer.get(j).getOutput(prevLayerOutputs);
+                }
+                prevLayerOutputs = Arrays.copyOf(layerOutputs, layerOutputs.length);
+            }
+        }
+        return Arrays.copyOf(layerOutputs, layerOutputs.length);
     }
 }
