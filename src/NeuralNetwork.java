@@ -8,8 +8,6 @@ public class NeuralNetwork {
 
     public NeuralNetwork(String id, int inputCount, int outputCount,
                          int hiddenLayerCount, int hiddenLayerSize) {
-        //TODO: Implement NeuralNetwork()
-
         this.ID = id;
 
         layers = new ArrayList<>();
@@ -40,5 +38,6 @@ public class NeuralNetwork {
 
     public double[] getOutputs(double[] inputs) {
         return null; //TODO: Implement getOutputs()
+        double[] outputs = new double[outputNodes.size()];
     }
 }
