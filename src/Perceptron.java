@@ -1,26 +1,22 @@
+import java.util.Random;
 
 public class Perceptron {
 
     private String ID;
-    private double[] inputs;
     private double[] weights;
     private double bias;
 
-    public Perceptron(String ID) {
+    public Perceptron(String ID, int inputCount) {
         this.ID = ID;
-        this.inputs = null;
-        this.weights = null;
+        this.weights = new double[inputCount];
+        for (int i = 0; i < inputCount; i++) {
+            Random r = new Random();
+            weights[i] = (r.nextDouble() * 2) - 1;
+        }
         this.bias = 0;
     }
 
-    public Perceptron(String ID, double[] inputs, double[] weights, double bias) {
-        this.ID = ID;
-        this.inputs = inputs;
-        this.weights = weights;
-        this.bias = bias;
-    }
-
-    public double getOutput() {
+    public double getOutput(double[] inputs) {
         double output = 0;
         for (int i = 0; i < inputs.length; i++) {
             output += inputs[i] * weights[i];
@@ -48,14 +44,6 @@ public class Perceptron {
 
     public void setID(String ID) {
         this.ID = ID;
-    }
-
-    public double[] getInputs() {
-        return inputs;
-    }
-
-    public void setInputs(double[] inputs) {
-        this.inputs = inputs;
     }
 
     public double[] getWeights() {
