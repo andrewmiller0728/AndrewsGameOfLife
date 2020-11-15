@@ -6,7 +6,7 @@ public class DNA {
     private NeuralNetwork neuralNetwork;
 
     public DNA(NeuralNetwork neuralNetwork) {
-        this.neuralNetwork = neuralNetwork;
+        this.neuralNetwork = neuralNetwork.getCopy();
     }
 
     public void mutate(double factor) {
