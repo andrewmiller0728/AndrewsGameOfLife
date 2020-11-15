@@ -40,6 +40,19 @@ public class NeuralNetwork {
         layers.add(outputNodes);
     }
 
+    public NeuralNetwork(String id, ArrayList<ArrayList<Perceptron>> layers) {
+        this.ID = id;
+        this.layers = new ArrayList<>();
+        for (int i = 0; i < layers.size(); i++) {
+            this.layers.add(new ArrayList<>());
+            for (int j = 0; j < layers.get(i).size(); j++) {
+                this.layers.get(i).add(layers.get(i).get(j).getCopy());
+            }
+        }
+        this.inputNodes = this.layers.get(0);
+        this.outputNodes = this.layers.get(this.layers.size() - 1);
+    }
+
     public double[] getOutputs(double[] inputs) {
         double[] layerOutputs = null;
         double[] prevLayerOutputs = null;
@@ -64,5 +77,9 @@ public class NeuralNetwork {
 
     public ArrayList<ArrayList<Perceptron>> getLayers() {
         return layers;
+    }
+
+    public NeuralNetwork getCopy() {
+        return new NeuralNetwork(this.ID, this.layers);
     }
 }

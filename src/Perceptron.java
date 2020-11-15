@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public class Perceptron {
@@ -14,6 +15,12 @@ public class Perceptron {
             weights[i] = r.nextDouble();
         }
         this.bias = 0;
+    }
+
+    public Perceptron(String id, double[] weights, double bias) {
+        this.ID = id;
+        this.weights = Arrays.copyOf(weights, weights.length);
+        this.bias = bias;
     }
 
     public double getOutput(double input) {
@@ -35,6 +42,10 @@ public class Perceptron {
         else {
             return 0;
         }
+    }
+
+    public Perceptron getCopy() {
+        return new Perceptron(this.ID, this.weights, this.bias);
     }
 
 
