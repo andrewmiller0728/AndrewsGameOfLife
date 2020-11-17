@@ -10,27 +10,23 @@ public class GeneticLineClassifier {
     private static final double THRESHOLD = 0.0001;
 
     public static void main(String[] args) {
-        NeuralNetwork nn = new NeuralNetwork("NN-0",
-                                             2,
-                                             2,
-                                             3,
-                                             3);
-        DNA startingDNA = new DNA(nn);
+        NeuralNetwork nn;
+        DNA startingDNA = null;
         ArrayList<NeuralNetwork> population = new ArrayList<>();
         for (int i = 0; i < INIT_SIZE; i++) {
             nn = new NeuralNetwork("NN-0",
                                    2,
                                    2,
                                    3,
-                                   3);
+                                   5);
             startingDNA = new DNA(nn);
             population.addAll(createOffspring(startingDNA, 1));
         }
 
-        double[] inputs1 = {90, 2};
+        double[] inputs1 = {81, 6};
         double[] inputs2 = {2, 90};
         double[] inputs3 = {35, 50};
-        double[] inputs4 = {83, 80};
+        double[] inputs4 = {3, 1};
 
         System.out.println("Before Training:\n");
         System.out.println(getPopulationSurvey(population, inputs1));
@@ -45,7 +41,7 @@ public class GeneticLineClassifier {
 
             double[] currInput = {rand.nextDouble() * 100, rand.nextDouble() * 100};
             int choice = 1;
-            if (currInput[1] > currInput[0]) {
+            if (currInput[1] > f(currInput[0])) {
                 choice = 0;
             }
             population = getFittest(population, currInput, choice);
@@ -72,7 +68,7 @@ public class GeneticLineClassifier {
     }
 
     private static double f(double x) {
-        return x;
+        return Math.pow(x, 2);
     }
 
     private static ArrayList<NeuralNetwork> createOffspring(DNA parentDNA, int count) {
